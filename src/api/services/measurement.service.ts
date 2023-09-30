@@ -32,7 +32,9 @@ export async function getMeasurement(
   };
 
   try {
-    const result = await MeasurementModel.findOne(query, {}, options);
+    const result = await MeasurementModel.findOne(query, {}, options).populate([
+      { path: 'client', select: ['firstName', 'surname'] },
+    ]);
     logger.info({ ...metricsLabels, success: 'true' });
     return result;
   } catch (e) {

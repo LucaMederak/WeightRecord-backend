@@ -5,7 +5,7 @@ import { IMeasurementInput } from '@interfaces/measurement.interfaces';
 const payload: Record<keyof Omit<IMeasurementInput, 'user'>, yup.AnySchema> = {
   name: yup.string().required(),
   client: yup.string().required(),
-  date: yup.string().transform((date) => new Date(date)),
+  date: yup.date().required(),
   notes: yup.string(),
   weight: yup.number().positive().required(),
   height: yup.number().positive().required(),
