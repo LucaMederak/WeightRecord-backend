@@ -4,7 +4,7 @@ export const accessTokenCookieOptions: CookieOptions = {
   maxAge: 900000, // 15 mins
   httpOnly: true,
   domain:
-    process.env.NODE_ENV === 'dev' ? 'localhost' : 'weightrecord.mederak.com',
+    process.env.NODE_ENV === 'dev' ? 'localhost' : 'weight-record.mederak.com',
   path: '/',
   sameSite: 'none',
   secure: true,

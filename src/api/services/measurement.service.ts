@@ -53,7 +53,9 @@ export async function getMeasurements(
   };
 
   try {
-    const result = await MeasurementModel.find(query, {}, options);
+    const result = await MeasurementModel.find(query, {}, options).populate([
+      { path: 'client', select: ['firstName', 'surname'] },
+    ]);
     logger.info({ ...metricsLabels, success: 'true' });
     return result;
   } catch (e) {
