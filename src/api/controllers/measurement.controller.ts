@@ -12,6 +12,7 @@ import createHttpError from 'http-errors';
 import {
   CreateMeasurementInput,
   DeleteMeasurementInput,
+  GetClientMeasurementsInput,
   GetMeasurementInput,
   UpdateMeasurementInput,
 } from '@schemas/measurement.schema';
@@ -116,6 +117,27 @@ export async function getMeasurementsController(
     }
 
     return res.send(measurements);
+  } catch (e) {
+    const httpError = createHttpError(404);
+    return next(httpError);
+  }
+}
+
+export async function getClientMeasurementsController(
+  req: Request<object, object, object, GetClientMeasurementsInput['query']>,
+  res: Response,
+  next: NextFunction
+) {
+  const clientId = req.query.clientId;
+
+  try {
+    const clientMeasurements = await getMeasurements({ client: clientId });
+
+    if (!clientMeasurements) {
+      return res.sendStatus(404);
+    }
+
+    return res.send(clientMeasurements);
   } catch (e) {
     const httpError = createHttpError(404);
     return next(httpError);

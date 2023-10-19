@@ -36,6 +36,10 @@ const params = {
   measurementId: yup.string().required('Measurement id is required'),
 };
 
+const query = {
+  clientId: yup.string().required('Client id is required'),
+};
+
 export const createMeasurementSchema = yup.object().shape({
   body: yup.object().shape({
     ...payload,
@@ -57,6 +61,12 @@ export const getMeasurementSchema = yup.object().shape({
   }),
 });
 
+export const getClientMeasurementsSchema = yup.object().shape({
+  query: yup.object().shape({
+    ...query,
+  }),
+});
+
 export const deleteMeasurementSchema = yup.object().shape({
   params: yup.object().shape({
     ...params,
@@ -66,4 +76,7 @@ export const deleteMeasurementSchema = yup.object().shape({
 export type CreateMeasurementInput = yup.TypeOf<typeof createMeasurementSchema>;
 export type UpdateMeasurementInput = yup.TypeOf<typeof updateMeasurementSchema>;
 export type GetMeasurementInput = yup.TypeOf<typeof getMeasurementSchema>;
+export type GetClientMeasurementsInput = yup.TypeOf<
+  typeof getClientMeasurementsSchema
+>;
 export type DeleteMeasurementInput = yup.TypeOf<typeof deleteMeasurementSchema>;

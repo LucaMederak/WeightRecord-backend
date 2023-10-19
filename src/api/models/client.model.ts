@@ -11,6 +11,7 @@ const ClientSchema = new Schema<IClientDocument>(
     dateOfBirth: { type: Date, required: true },
     gender: { type: String, required: true },
     email: { type: String },
+    phoneNumber: { type: String },
     street: { type: String },
     zipCode: { type: String },
     city: { type: String },

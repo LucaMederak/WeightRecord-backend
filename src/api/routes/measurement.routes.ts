@@ -7,6 +7,7 @@ import {
   getMeasurementController,
   deleteMeasurementController,
   updateMeasurementController,
+  getClientMeasurementsController,
 } from '@controllers/measurement.controller';
 
 //schema
@@ -15,6 +16,7 @@ import {
   updateMeasurementSchema,
   deleteMeasurementSchema,
   getMeasurementSchema,
+  getClientMeasurementsSchema,
 } from '@schemas/measurement.schema';
 
 //middleware
@@ -30,6 +32,11 @@ router.post(
 );
 
 router.get('/', requireUser, getMeasurementsController);
+router.get(
+  '/clients',
+  [requireUser, validateSchema(getClientMeasurementsSchema)],
+  getClientMeasurementsController
+);
 
 router.get(
   '/:measurementId',
