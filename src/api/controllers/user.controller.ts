@@ -19,7 +19,7 @@ export async function createUserController(
     const existingUserEmail = await validateEmail(email);
 
     if (existingUserEmail) {
-      const httpError = createHttpError(404, {
+      const httpError = createHttpError(409, {
         message: 'There is already a user with this email address',
       });
       return next(httpError);
@@ -27,7 +27,7 @@ export async function createUserController(
 
     const user = await createUser(req.body);
     if (!user) {
-      const httpError = createHttpError(404, {
+      const httpError = createHttpError(500, {
         message: 'A server error occurred during registration',
       });
       return next(httpError);
