@@ -1,4 +1,10 @@
-import { FilterQuery, QueryOptions, UpdateQuery } from 'mongoose';
+import {
+  FilterQuery,
+  QueryOptions,
+  UpdateQuery,
+  SessionOption,
+  SaveOptions,
+} from 'mongoose';
 
 import TrainingPlanModel from '@models/training/trainingPlan.model';
 
@@ -9,15 +15,18 @@ import {
 
 import { logger } from '@utils/logger';
 
-export async function createTrainingPlan(input: ITrainingPlanInput) {
+export async function createTrainingPlan(
+  input: ITrainingPlanInput,
+  options?: SaveOptions
+) {
   const metricsLabels = {
     operation: 'createTrainingPlan',
   };
 
   try {
-    const result = await TrainingPlanModel.create(input);
+    const result = await TrainingPlanModel.create([input], options);
     logger.info({ ...metricsLabels, success: 'true' });
-    return result;
+    return result[0];
   } catch (e) {
     logger.error({ ...metricsLabels, success: 'false' });
     throw e;

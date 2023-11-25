@@ -1,4 +1,10 @@
-import { FilterQuery, QueryOptions, UpdateQuery } from 'mongoose';
+import {
+  FilterQuery,
+  QueryOptions,
+  UpdateQuery,
+  SaveOptions,
+  InsertManyOptions,
+} from 'mongoose';
 
 import TrainingUnitStageModel from '@models/training/trainingUnit/trainingUnitStage.model';
 
@@ -9,13 +15,36 @@ import {
 
 import { logger } from '@utils/logger';
 
-export async function createTrainingUnitStage(input: ITrainingUnitStageInput) {
+export async function createTrainingUnitStage(
+  input: ITrainingUnitStageInput,
+  options?: SaveOptions
+) {
   const metricsLabels = {
     operation: 'createTrainingUnitStage',
   };
 
   try {
-    const result = await TrainingUnitStageModel.create(input);
+    const result = await TrainingUnitStageModel.create([input], options);
+
+    logger.info({ ...metricsLabels, success: 'true' });
+    return result[0];
+  } catch (e) {
+    logger.error({ ...metricsLabels, success: 'false' });
+    throw e;
+  }
+}
+
+export async function createManyTrainingUnitStages(
+  input: ITrainingUnitStageInput[],
+  options: InsertManyOptions
+) {
+  const metricsLabels = {
+    operation: 'createManyTrainingUnitStages',
+  };
+
+  try {
+    const result = await TrainingUnitStageModel.insertMany(input, options);
+
     logger.info({ ...metricsLabels, success: 'true' });
     return result;
   } catch (e) {

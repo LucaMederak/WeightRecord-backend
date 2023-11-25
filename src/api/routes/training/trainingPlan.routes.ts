@@ -7,6 +7,7 @@ import {
   getTrainingPlanController,
   deleteTrainingPlanController,
   updateTrainingPlanController,
+  createTrainingPlanWithTrainingUnitController,
 } from '@controllers/training/trainingPlan.controller';
 
 //schema
@@ -22,6 +23,12 @@ import requireUser from '@middleware/requireUser';
 import { validateSchema } from '@middleware/validateSchema';
 
 const router = express.Router();
+
+router.post(
+  '/unit',
+  [requireUser, validateSchema(createTrainingPlanSchema)],
+  createTrainingPlanWithTrainingUnitController
+);
 
 router.post(
   '/',
