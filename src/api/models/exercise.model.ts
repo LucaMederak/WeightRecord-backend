@@ -22,6 +22,7 @@ const ExerciseSchema = new Schema<IExerciseDocument>(
       },
       asset: { type: String },
     },
+    alternativeNames: [{ type: String }],
     attachments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Asset' }],
   },
   {

@@ -22,6 +22,7 @@ const payload: Record<keyof Omit<IExerciseInput, 'user'>, yup.AnySchema> = {
       then: yup.string().required(),
     }),
   }),
+  alternativeNames: yup.array(yup.string()),
   attachments: yup.array(yup.string()),
 };
 

@@ -18,6 +18,7 @@ export interface IExerciseInput {
     link?: string;
     asset?: IAssetDocument['_id'];
   };
+  alternativeNames?: string[];
   attachments: IAssetDocument['_id'][];
 }
 
