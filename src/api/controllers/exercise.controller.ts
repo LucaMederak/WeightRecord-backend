@@ -29,17 +29,9 @@ export async function createExerciseController(
       user: userId,
     });
 
-    if (!exercise) {
-      const httpError = createHttpError(500, {
-        message: 'A server error occurred during create exercise',
-      });
-      return next(httpError);
-    }
-
     return res.status(201).json(exercise);
   } catch (e) {
-    const httpError = createHttpError(400);
-    return next(httpError);
+    return next(e);
   }
 }
 

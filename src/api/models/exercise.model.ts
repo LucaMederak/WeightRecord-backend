@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 
 const ExerciseSchema = new Schema<IExerciseDocument>(
   {
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     name: { type: String, required: true },
     description: { type: String },
     image: { type: mongoose.Schema.Types.ObjectId, ref: 'Asset' },
@@ -16,7 +16,7 @@ const ExerciseSchema = new Schema<IExerciseDocument>(
       },
     ],
     video: {
-      type: { type: String, required: true, enum: ['link', 'asset'] },
+      type: { type: String, enum: ['link', 'asset'] },
       link: {
         type: String,
       },

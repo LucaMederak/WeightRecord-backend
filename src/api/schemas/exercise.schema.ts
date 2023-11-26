@@ -11,17 +11,20 @@ const payload: Record<keyof Omit<IExerciseInput, 'user'>, yup.AnySchema> = {
       description: yup.string().required(),
     })
   ),
-  video: yup.object({
-    type: yup.string().oneOf(['link', 'asset']).required(),
-    link: yup.string().when('type', {
-      is: 'link',
-      then: yup.string().required(),
-    }),
-    asset: yup.string().when('type', {
-      is: 'asset',
-      then: yup.string().required(),
-    }),
-  }),
+  video: yup
+    .object({
+      type: yup.string().oneOf(['link', 'asset']).required(),
+      link: yup.string().when('type', {
+        is: 'link',
+        then: yup.string().required(),
+      }),
+      asset: yup.string().when('type', {
+        is: 'asset',
+        then: yup.string().required(),
+      }),
+    })
+    .optional()
+    .default(undefined),
   alternativeNames: yup.array(yup.string()),
   attachments: yup.array(yup.string()),
 };

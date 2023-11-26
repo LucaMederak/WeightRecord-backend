@@ -38,8 +38,7 @@ export async function createClientController(
 
     return res.status(201).json(client);
   } catch (e) {
-    const httpError = createHttpError(409);
-    return next(httpError);
+    return next(e);
   }
 }
 

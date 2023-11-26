@@ -19,7 +19,7 @@ export interface IExerciseInput {
     asset?: IAssetDocument['_id'];
   };
   alternativeNames?: string[];
-  attachments: IAssetDocument['_id'][];
+  attachments?: IAssetDocument['_id'][];
 }
 
 export interface IExerciseDocument extends IExerciseInput, mongoose.Document {
